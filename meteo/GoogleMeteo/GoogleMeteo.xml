@@ -1,0 +1,49 @@
+﻿<grammar version="1.0" xml:lang="fr-FR" mode="voice" root="ruleGoogleMeteo" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
+	<rule id="ruleGoogleMeteo" scope="public">
+		<example>Jarvis quelle est la météo demain à La Flèche</example>
+		<tag>out.action=new Object(); </tag>
+
+		<item>SARAH</item>
+
+		<one-of>
+			<item>la météo</item>
+			<item>quelle est la météo</item>
+			<item>tu peux me donner la météo</item>
+			<item>peux tu me donner la météo</item>
+			<item>quelle est le temps</item>
+			<item>quelle temps fait il</item>
+			<item>il fait quelle temps</item>
+			<item>quelle est la température</item>
+		</one-of>
+
+		<item repeat="0-1">
+			<one-of>
+				<item>aujourd'hui<tag>out.action.date="0";</tag></item>
+				<item>en ce moment<tag>out.action.date="0";</tag></item>
+
+				<item>ce matin<tag>out.action.date="0_matin";</tag></item>
+				<item>ce midi<tag>out.action.date="0_midi";</tag></item>
+				<item>ce soir<tag>out.action.date="0_soir";</tag></item>
+				<item>cette nuit<tag>out.action.date="0_nuit";</tag></item>
+
+				<item>demain<tag>out.action.date="1_matin";</tag></item>
+				<item>demain matin<tag>out.action.date="1_matin";</tag></item>
+				<item>demain midi<tag>out.action.date="1_midi";</tag></item>
+				<item>demain soir<tag>out.action.date="1_soir";</tag></item>
+				<item>la nuit prochaine<tag>out.action.date="1_nuit";</tag></item>
+
+				<item>après demain<tag>out.action.date="2_matin";</tag></item>
+				<item>après demain matin<tag>out.action.date="2_matin";</tag></item>
+				<item>après demain midi<tag>out.action.date="2_midi";</tag></item>
+				<item>après demain soir<tag>out.action.date="2_soir";</tag></item>
+				<item>dans 2 nuits<tag>out.action.date="2_nuit";</tag></item>
+			</one-of>
+			<tag>out.action.dateask="true";</tag>
+		</item>
+		<item repeat="0-1">
+			<ruleref special="GARBAGE" />
+		</item>
+		
+		<tag>out.action._attributes.uri="http://127.0.0.1:8080/sarah/GoogleMeteo";</tag>
+	</rule>
+</grammar>
